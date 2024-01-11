@@ -15,7 +15,7 @@ spec:
             name: svc-blue
             port: 
               number: 8080
-  - host: blue-00.apps.cluster1.openshift.vms.sass.ro
+  - host: green-00.apps.cluster1.openshift.vms.sass.ro
     http:
       paths:
       - path: /
