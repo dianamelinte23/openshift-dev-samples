@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: vhosts-blue-green
 spec:
-  ingressClassName: nginx
+  ingressClassName: openshift-default
   rules:
   - host: blue-00.apps.cluster1.openshift.vms.sass.ro
     http:
