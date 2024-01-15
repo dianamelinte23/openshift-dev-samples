@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: alpine-kubectl
+  name: alpine-tools
 spec:
   containers:
     - name: alpine
-      image: bogd/alpine-kubectl:latest
+      image: bogd/alpine-tools:latest
       stdin: true
       tty: true
 

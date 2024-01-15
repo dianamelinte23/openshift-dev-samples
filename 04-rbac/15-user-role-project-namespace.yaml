@@ -1,0 +1,33 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: restricted-user
+  namespace: default
+rules:
+- apiGroups: [""]
+  resources: ["pods"] 
+  verbs: ["get", "list"] 
+# Showing the expanded syntax as well - it is equivalent to the "compressed" one above
+- apiGroups:
+  - route.openshift.io
+  resources:
+  - routes
+  verbs:
+  - get
+  - list
+# Make user a member of the correct project
+- apiGroups:
+  - project.openshift.io
+  resources:
+  - projects
+  verbs: 
+  - get
+# Also required for project membership to work correctly
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  
+
