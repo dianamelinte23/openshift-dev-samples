@@ -4,7 +4,7 @@ metadata:
   name: nginx01
 spec:
   containers:
-    - image: nginx
+    - image: bitnami/nginx
       name: nginx
       securityContext:
         allowPrivilegeEscalation: false
