@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webservers
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webservers
+  template:
+    metadata:
+      labels:
+        app: webservers
+    spec:
+      containers:
+        - name: nginx
+          image: bitnami/nginx
+          securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 1000
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile: 
+            type: RuntimeDefault
+  
