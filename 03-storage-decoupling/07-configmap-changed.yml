@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-01
+data:
+  index.html: This is another message in a ConfigMap!
+  name: Bogdan Sass
