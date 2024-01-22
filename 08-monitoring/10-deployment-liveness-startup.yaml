@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: logger
+  name: webapp
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: logger-depl
+      app: webapp
   template:
     metadata:
       labels:
-        app: logger-depl
+        app: webapp
     spec:
       containers:
-      - name: logger
-        image: bogd/logging-test:latest
+      - name: webserver
+        image: bogd/go-webserver:latest
         #        env:
         #- name: LOG_MESSAGE
         #  value: "test message from bogd"
@@ -25,4 +25,15 @@ spec:
             drop: ["ALL"]
           seccompProfile: 
             type: RuntimeDefault
-  
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          periodSeconds: 2
+          failureThreshold: 2    
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          periodSeconds: 2
+          failureThreshold: 30   
