@@ -1,0 +1,55 @@
+podSecurityContext:
+  enabled: true
+  fsGroupChangePolicy: null
+  fsGroup: null
+  sysctls: []
+  supplementalGroups: []
+
+containerSecurityContext:
+  enabled: true
+  seLinuxOptions: null
+  runAsNonRoot: true
+  runAsUser: null
+  privileged: false
+  readOnlyRootFilesystem: false
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["ALL"]
+  seccompProfile:
+    type: "RuntimeDefault"
+
+service:
+  type: ClusterIP
+  ports:
+    http: 80
+    https: 443
+  httpsTargetPort: https
+  
+ingress:
+  enabled: true
+  pathType: ImplementationSpecific
+  apiVersion: ""
+  ingressClassName: openshift-default
+  hostname: wordpress.user-03.apps.cluster1.openshift.vms.sass.ro
+  path: /
+
+mariadb:
+  primary:
+    podSecurityContext:
+      enabled: false
+      fsGroupChangePolicy: null
+      fsGroup: null
+      sysctls: []
+      supplementalGroups: []
+    containerSecurityContext:
+      enabled: false
+      seLinuxOptions: null
+      runAsUser: null
+      runAsNonRoot: true
+      privileged: false
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop: ["ALL"]
+      seccompProfile:
+        type: "RuntimeDefault"
+  
