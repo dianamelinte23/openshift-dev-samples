@@ -1,8 +1,20 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: metallb-system 
+namespace: user-03-staging
 resources: 
 - ../../base
-- addresspool-public-core-staging.yaml
-
-
+patches:
+- target:
+    kind: Ingress
+    name: webapp
+  patch: |-
+    - op: replace
+      path: /spec/rules/0/host
+      value: webapp-03-staging.apps.cluster1.openshift.vms.sass.ro
+- target:
+    kind: Deployment
+    name: webapp
+  patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/env
+      value: [{"name": "COLOR", "value": "#00FF00"}]

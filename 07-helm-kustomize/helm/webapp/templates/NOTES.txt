@@ -2,7 +2,14 @@
 {{- if .Values.ingress.enabled }}
 {{- range $host := .Values.ingress.hosts }}
   {{- range .paths }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ tpl $host.host $ }}{{ .path }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://
+    {{- if not .host }}{{ $.Values.appName }}-{{ $.Values.userid | int | printf "%02d" -}}
+        {{- if $.Values.nameSuffix }}-{{ $.Values.nameSuffix }}{{ end -}}
+        .apps.cluster1.openshift.vms.sass.ro
+      {{- else }} 
+	    {{- .host }}
+    {{- end -}}
+    {{ .path }}
   {{- end }}
 {{- end }}
 {{- else if contains "NodePort" .Values.service.type }}

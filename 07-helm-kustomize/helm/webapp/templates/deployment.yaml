@@ -53,6 +53,8 @@ spec:
           env: 
           - name: PORT
             value: "{{ .Values.listenPort | toString }}"
+          - name: COLOR
+            value: "{{ .Values.webPageColor }}"
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

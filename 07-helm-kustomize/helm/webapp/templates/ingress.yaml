@@ -39,7 +39,12 @@ spec:
   {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
-    - host: {{ tpl .host $ | quote }}
+    - host: 
+      {{- if not .host }} {{ $.Values.appName }}-{{ $.Values.userid | int | printf "%02d" -}}
+        {{- if $.Values.nameSuffix }}-{{ $.Values.nameSuffix }}{{ end -}}
+        .apps.cluster1.openshift.vms.sass.ro
+      {{- else }} {{ .host }}
+      {{- end }}
       http:
         paths:
           {{- range .paths }}

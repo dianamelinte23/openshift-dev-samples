@@ -3,6 +3,11 @@
 
 userid: 0
 listenPort: 8000
+webPageColor: "#0000FF"
+
+appName: app
+nameSuffix: ""
+# The external URL will be <appName>-<userid>-<nameSuffix>.apps.domain.sass.ro
 
 namespace: user-{{ .Values.userid | int | printf "%02d" }}
 
@@ -22,7 +27,6 @@ podAnnotations: {}
 podLabels: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
 
 securityContext: 
   allowPrivilegeEscalation: false
@@ -39,11 +43,8 @@ service:
 ingress:
   enabled: true
   className: openshift-default
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: webapp-{{ .Values.userid | int | printf "%02d" }}.apps.cluster1.openshift.vms.sass.ro
+  hosts: 
+    - host: ""
       paths:
         - path: /
           pathType: ImplementationSpecific
