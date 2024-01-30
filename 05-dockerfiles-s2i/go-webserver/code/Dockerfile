@@ -1,4 +1,4 @@
-FROM golang:1.21-alpine as builder
+FROM docker.io/golang:1.21-alpine as builder
 
 RUN mkdir -p /webserver
 
@@ -10,7 +10,7 @@ RUN go mod download
 
 RUN go build -o bin/webserver src/main.go
 
-FROM alpine:3.18
+FROM docker.io/alpine:3.18
 
 ARG BUILD_DATE
 ARG VERSION

@@ -6,13 +6,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webserver-custom
+      app: webserver
   template:
     metadata:
       labels:
-        app: webserver-custom
+        app: webserver
     spec:
       containers:
       - name: webserver
-        image: bogd/training-nginx:v2
-        
+        image: user-00/webserver:v1
+       
