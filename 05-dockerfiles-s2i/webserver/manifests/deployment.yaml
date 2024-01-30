@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver-custom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webserver-custom
+  template:
+    metadata:
+      labels:
+        app: webserver-custom
+    spec:
+      containers:
+      - name: webserver
+        image: bogd/training-nginx:v1
+        
