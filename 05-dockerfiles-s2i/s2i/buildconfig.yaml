@@ -1,0 +1,26 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: go-webserver
+  name: go-webserver
+  namespace: user-00
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: go-webserver:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    contextDir: 05-dockerfiles-s2i/go-webserver/code
+    git:
+      uri: https://github.com/bogd13/openshift-dev-samples.git
+    type: Git
+  strategy:
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: alpine:3.18
+    type: Docker
