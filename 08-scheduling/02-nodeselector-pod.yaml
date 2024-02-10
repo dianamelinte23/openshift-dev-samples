@@ -13,7 +13,6 @@ spec:
           drop: ["ALL"]
         seccompProfile: 
           type: RuntimeDefault 
-  # Remember that using nodeName is generally NOT recommended!
-  nodeName: cluster1-wrkjc-worker-c-k6mqp
-
-
+  nodeSelector:
+    training.sass.ro/k8slab: preferred
+    

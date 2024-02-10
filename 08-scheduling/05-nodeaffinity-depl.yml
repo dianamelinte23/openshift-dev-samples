@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   name: webservers
 spec:
-  replicas: 10
+  replicas: 3
   selector:
     matchLabels:
-      app: nginx-depl
+      app: webservers
   template:
     metadata:
       labels:
-        app: nginx-depl
+        app: webservers
     spec:
       affinity:
         nodeAffinity:
@@ -18,9 +18,16 @@ spec:
             nodeSelectorTerms:
             - matchExpressions:
               - key: cpus
-                operator: NotIn
+                operator: In
                 values:
-                - "4" 
+                - "4"
       containers:
       - name: nginx
-        image: nginx:1.14.0
+        image: bitnami/nginx
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile: 
+            type: RuntimeDefault 

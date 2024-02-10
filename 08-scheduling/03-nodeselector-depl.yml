@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webservers
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webservers
+  template:
+    metadata:
+      labels:
+        app: webservers
+    spec:
+      nodeSelector:
+        training.sass.ro/k8slab: preferred
+      containers:
+      - name: nginx
+        image: bitnami/nginx
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile: 
+            type: RuntimeDefault 

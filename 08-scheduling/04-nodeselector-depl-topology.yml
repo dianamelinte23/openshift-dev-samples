@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webservers
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webservers
+  template:
+    metadata:
+      labels:
+        app: webservers
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        topology.kubernetes.io/zone: us-central1-c
+      containers:
+      - name: nginx
+        image: bitnami/nginx
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile: 
+            type: RuntimeDefault 
+    
